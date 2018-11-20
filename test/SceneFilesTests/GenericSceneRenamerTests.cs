@@ -5,7 +5,7 @@ using Xunit;
 
 namespace SceneFilesTests
 {
-    public class GenericSceneFileRenamerTests
+    public class GenericSceneRenamerTests
     {
         [Theory]
         [InlineData(@"c:\This.is.my.filename.with.an.extension.lol", @"c:\This Is My Filename With an Extension.lol")]
@@ -17,10 +17,26 @@ namespace SceneFilesTests
                 { pathBeforeRename, new MockFileData("") },
             });
 
-            new GenericSceneFileRenamer(new FileAndDirectoryRenamer(fileSystem)).Rename(pathBeforeRename);
+            new GenericSceneRenamer(new FileAndDirectoryRenamer(fileSystem)).RenameFileOrDirectory(pathBeforeRename);
 
             Assert.True(fileSystem.File.Exists(pathAfterRename));
             Assert.False(fileSystem.File.Exists(pathBeforeRename));
+        }
+
+        [Theory]
+        [InlineData(@"c:\this.is.my.folder", @"c:\This Is My Folder")]
+        public void GenericRenameFolder(string pathBeforeRename, string pathAfterRename)
+        {
+            var fileSystem = new MockFileSystem();
+
+            fileSystem.AddDirectory(pathBeforeRename);
+
+            new GenericSceneRenamer(new FileAndDirectoryRenamer(fileSystem)).RenameFileOrDirectory(pathBeforeRename);
+
+            Assert.True(fileSystem.Directory.Exists(pathAfterRename));
+            Assert.False(fileSystem.Directory.Exists(pathBeforeRename));
+
+
         }
     }
 }

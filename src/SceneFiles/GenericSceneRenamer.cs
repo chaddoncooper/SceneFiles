@@ -1,17 +1,17 @@
 ﻿namespace SceneFiles
 {
-    public class GenericSceneFileRenamer : ISceneFileRenamer
+    public class GenericSceneRenamer : ISceneRenamer
     {
         private readonly IFileAndDirectoryRenamer _fileAndDirectoryRenamer;
 
-        public GenericSceneFileRenamer(IFileAndDirectoryRenamer fileAndDirectoryRenamer)
+        public GenericSceneRenamer(IFileAndDirectoryRenamer fileAndDirectoryRenamer)
         {
             _fileAndDirectoryRenamer = fileAndDirectoryRenamer;
         }
 
-        public void Rename(string path)
+        public void RenameFileOrDirectory(string fileOrDirectoryPath)
         {
-            var newName = _fileAndDirectoryRenamer.GetCurrentFileOrDirectoryName(path);
+            var newName = _fileAndDirectoryRenamer.GetCurrentFileOrDirectoryName(fileOrDirectoryPath);
 
             newName = ReplaceCharsWithWhitespace(newName);
             newName = newName.ToTitleCase();
@@ -19,7 +19,7 @@
             newName = newName.UpperCaseFirstLetter();
             newName = newName.PutLastOccurenceOfAYearInParentheses();
 
-            _fileAndDirectoryRenamer.RenameFileWithoutExtensionOrDirectory(path, newName);
+            _fileAndDirectoryRenamer.RenameFileWithoutExtensionOrDirectory(fileOrDirectoryPath, newName);
         }
 
         private static string ReplaceCharsWithWhitespace(string inputString)
