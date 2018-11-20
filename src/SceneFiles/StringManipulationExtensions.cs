@@ -52,7 +52,7 @@ namespace SceneFiles
         /// <returns>String with the last occurence of a year in parentheses.</returns>
         public static string PutLastOccurenceOfAYearInParentheses(this string str)
         {
-            const string pattern = @"\d{4}";
+            const string pattern = @"(?<=\s|^)\d{4}(?=\s|$)";
             var match = Regex.Match(str, pattern, RegexOptions.RightToLeft);
             if (match.Success)
             {

@@ -46,6 +46,8 @@ namespace SceneFilesTests
         [InlineData("This is a year 2010", "This is a year (2010)")]
         [InlineData("This is a year 2050", "This is a year (2050)")]
         [InlineData("Ignore this year 2000. This is a year 2050", "Ignore this year 2000. This is a year (2050)")]
+        [InlineData("20022 This isn't a year", "20022 This isn't a year")]
+        [InlineData("This isn't a year 19992", "This isn't a year 19992")]
         public void PutLastOccurenceOfAYearInParentheses(string inputString, string expectedOutput)
         {
             var output = inputString.PutLastOccurenceOfAYearInParentheses();
