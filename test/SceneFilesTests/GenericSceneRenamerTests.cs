@@ -35,8 +35,6 @@ namespace SceneFilesTests
 
             Assert.True(fileSystem.Directory.Exists(pathAfterRename));
             Assert.False(fileSystem.Directory.Exists(pathBeforeRename));
-
-
         }
     }
 }

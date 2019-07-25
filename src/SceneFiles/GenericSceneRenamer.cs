@@ -18,6 +18,7 @@
             newName = LowercaseWords(newName);
             newName = newName.UpperCaseFirstLetter();
             newName = newName.PutLastOccurenceOfAYearInParentheses();
+            newName = newName.FormatEditionsToLowercase();
 
             _fileAndDirectoryRenamer.RenameFileWithoutExtensionOrDirectory(fileOrDirectoryPath, newName);
         }

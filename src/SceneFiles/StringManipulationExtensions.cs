@@ -71,5 +71,27 @@ namespace SceneFiles
         {
             return str.First().ToString().ToUpper() + str.Substring(1);
         }
+
+        /// <summary>
+        /// Ensure that any editions within a string are formatted to lowercase
+        /// </summary>
+        /// <param name="inputString"></param>
+        /// <returns></returns>
+        public static string FormatEditionsToLowercase(this string str)
+        {
+            var pattern = "\\D(\\d+)(st|nd|rd|th)";
+            var regex = new Regex(pattern);
+      
+            var matches = Regex.Matches(str, pattern, RegexOptions.IgnoreCase);
+            foreach (Match match in matches)
+            {
+                if (match.Success)
+                {
+                    str = str.Replace(match.Value, match.Value.ToLower());
+                }
+            }
+            
+            return str;
+        }
     }
 }

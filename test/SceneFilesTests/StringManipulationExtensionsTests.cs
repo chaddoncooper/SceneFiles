@@ -54,5 +54,19 @@ namespace SceneFilesTests
 
             Assert.Equal(expectedOutput, output);
         }
+
+        [Theory]
+        [InlineData(@"This is a 6Th Edition (2019)", "This is a 6th Edition (2019)")]
+        [InlineData(@"This is a 6TH Edition (2019)", "This is a 6th Edition (2019)")]
+        [InlineData(@"This is a 6th Edition (2019)", "This is a 6th Edition (2019)")]
+        [InlineData(@"This is a_6Th_Edition (2019)", "This is a_6th_Edition (2019)")]
+        [InlineData(@"This is a6Th_Edition (2019)", "This is a6th_Edition (2019)")]
+        [InlineData(@"This is a 6TH, also a 8TH Edition (2019)", "This is a 6th, also a 8th Edition (2019)")]
+        public void FormatEditionsToLowercase(string inputString, string expectedOutput)
+        {
+            var output = inputString.FormatEditionsToLowercase();
+
+            Assert.Equal(expectedOutput, output);
+        }
     }
 }
