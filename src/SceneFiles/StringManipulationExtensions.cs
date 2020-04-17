@@ -22,14 +22,14 @@ namespace SceneFiles
         /// Converts specified words within a string into lowercase.
         /// </summary>
         /// <param name="str">A string, usually a sentence.</param>
-        /// <param name="wordsToLowercase">Words which you wish to convert to lowercase.</param>
+        /// <param name="wordsToLowerCase">Words which you wish to convert to lowercase.</param>
         /// <returns>The string with specified words converted to lowercase.</returns>
-        public static string LowercaseSpecifiedWords(this string str, IEnumerable<string> wordsToLowercase)
+        public static string LowerCaseSpecifiedWords(this string str, IEnumerable<string> wordsToLowerCase)
         {
-            foreach (var wordToLowercase in wordsToLowercase)
+            foreach (var wordToLowerCase in wordsToLowerCase)
             {
-                var pattern = string.Format(@"(?<!\S){0}(?!\S)", wordToLowercase);
-                str = Regex.Replace(str, pattern, wordToLowercase.ToLower(), RegexOptions.IgnoreCase);
+                var pattern = string.Format(@"(?<!\S){0}(?!\S)", wordToLowerCase);
+                str = Regex.Replace(str, pattern, wordToLowerCase.ToLower(), RegexOptions.IgnoreCase);
             }
 
             return str;
@@ -39,14 +39,14 @@ namespace SceneFiles
         /// Converts specified words within a string into Uppercase.
         /// </summary>
         /// <param name="str">A string, usually a sentence.</param>
-        /// <param name="wordsToUppercase">Words which you wish to convert to Uppercase.</param>
+        /// <param name="wordsToUpperCase">Words which you wish to convert to Uppercase.</param>
         /// <returns>The string with specified words converted to Uppercase.</returns>
-        public static string UppercaseSpecifiedWords(this string str, IEnumerable<string> wordsToUppercase)
+        public static string UpperCaseSpecifiedWords(this string str, IEnumerable<string> wordsToUpperCase)
         {
-            foreach (var wordToUppercase in wordsToUppercase)
+            foreach (var wordToUpperCase in wordsToUpperCase)
             {
-                var pattern = string.Format(@"(?<!\S){0}(?!\S)", wordToUppercase);
-                str = Regex.Replace(str, pattern, wordToUppercase.ToUpper(), RegexOptions.IgnoreCase);
+                var pattern = string.Format(@"(?<!\S){0}(?!\S)", wordToUpperCase);
+                str = Regex.Replace(str, pattern, wordToUpperCase.ToUpper(), RegexOptions.IgnoreCase);
             }
 
             return str;
@@ -94,7 +94,7 @@ namespace SceneFiles
         /// </summary>
         /// <param name="inputString"></param>
         /// <returns></returns>
-        public static string FormatEditionsToLowercase(this string str)
+        public static string FormatEditionsToLowerCase(this string str)
         {
             var pattern = "\\D(\\d+)(st|nd|rd|th)";
             var regex = new Regex(pattern);
@@ -108,6 +108,23 @@ namespace SceneFiles
                 }
             }
             
+            return str;
+        }
+
+        /// <summary>
+        /// Remove specified words from a string.
+        /// </summary>
+        /// <param name="str">A string, usually a sentence.</param>
+        /// <param name="wordsToRemove">An enumeration of words to remove. Case sensitive.</param>
+        /// <returns></returns>
+        public static string RemoveSpecifiedWordsFromEnd(this string str, IEnumerable<string> wordsToRemove)
+        {
+            foreach (var wordToRemove in wordsToRemove)
+            {
+                var pattern = string.Format(@"(?<!\s){0}$", wordToRemove);
+                str = Regex.Replace(str, pattern, "");
+            }
+
             return str;
         }
     }

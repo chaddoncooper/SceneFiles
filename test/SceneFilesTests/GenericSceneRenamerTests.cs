@@ -7,6 +7,13 @@ namespace SceneFilesTests
 {
     public class GenericSceneRenamerTests
     {
+        private readonly TestAppSettings _testAppSettings;
+
+        public GenericSceneRenamerTests()
+        {
+            _testAppSettings = new TestAppSettings();
+        }
+
         [Theory]
         [InlineData(@"c:\This.is.my.filename.with.an.extension.lol", @"c:\This Is My Filename With an Extension.lol")]
         [InlineData(@"c:\This Is My Filename 1999 With a Year 2001.lol", @"c:\This Is My Filename 1999 With a Year (2001).lol")]
@@ -17,7 +24,7 @@ namespace SceneFilesTests
                 { pathBeforeRename, new MockFileData("") },
             });
 
-            new GenericSceneRenamer(new FileAndDirectoryRenamer(fileSystem)).RenameFileOrDirectory(pathBeforeRename);
+            new GenericSceneRenamer(new FileAndDirectoryRenamer(fileSystem), _testAppSettings).RenameFileOrDirectory(pathBeforeRename);
 
             Assert.True(fileSystem.File.Exists(pathAfterRename));
             Assert.False(fileSystem.File.Exists(pathBeforeRename));
@@ -31,7 +38,7 @@ namespace SceneFilesTests
 
             fileSystem.AddDirectory(pathBeforeRename);
 
-            new GenericSceneRenamer(new FileAndDirectoryRenamer(fileSystem)).RenameFileOrDirectory(pathBeforeRename);
+            new GenericSceneRenamer(new FileAndDirectoryRenamer(fileSystem), _testAppSettings).RenameFileOrDirectory(pathBeforeRename);
 
             Assert.True(fileSystem.Directory.Exists(pathAfterRename));
             Assert.False(fileSystem.Directory.Exists(pathBeforeRename));

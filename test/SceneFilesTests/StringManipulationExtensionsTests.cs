@@ -26,7 +26,7 @@ namespace SceneFilesTests
             var wordsToLowercase = new[]
                 {"the", "of", "and", "at", "vs", "a", "an", "BUT", "nor", "for", "on", "so", "yet"};
 
-            var output = inputString.LowercaseSpecifiedWords(wordsToLowercase);
+            var output = inputString.LowerCaseSpecifiedWords(wordsToLowercase);
 
             Assert.Equal(expectedOutput, output);
         }
@@ -39,7 +39,7 @@ namespace SceneFilesTests
             var wordsToUppercase = new[]
                 {"ai", "usa", "uk", "pal", "ntsc", "html", "ui", "dns", "html", "xml", "php", "ux", "usb", "uwp", "sql", "tfs", "css", "api" };
 
-            var output = inputString.UppercaseSpecifiedWords(wordsToUppercase);
+            var output = inputString.UpperCaseSpecifiedWords(wordsToUppercase);
 
             Assert.Equal(expectedOutput, output);
         }
@@ -77,8 +77,20 @@ namespace SceneFilesTests
         [InlineData(@"This is a 6TH, also a 8TH Edition (2019)", "This is a 6th, also a 8th Edition (2019)")]
         public void FormatEditionsToLowercase(string inputString, string expectedOutput)
         {
-            var output = inputString.FormatEditionsToLowercase();
+            var output = inputString.FormatEditionsToLowerCase();
 
+            Assert.Equal(expectedOutput, output);
+        }
+
+        [Theory]
+        [InlineData(@"this is a string-ReMovE", "this is a string-")]
+        [InlineData(@"this is a string-ReMove", "this is a string-ReMove")]
+        [InlineData(@"this is a string", "this is a string")]
+        public void RemoveSpecifiedWordsFromEnd(string inputString, string expectedOutput)
+        {
+            var wordsToRemove = new[] { "ReMovE" };
+            var output = inputString.RemoveSpecifiedWordsFromEnd(wordsToRemove);
+            
             Assert.Equal(expectedOutput, output);
         }
     }
