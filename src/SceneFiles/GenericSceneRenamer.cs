@@ -15,7 +15,7 @@
 
             newName = newName.ReplaceSpecifiedCharsWithWhitespace(new[] { '.', '_' });
             newName = newName.ToTitleCase();
-            newName = newName.LowercaseSpecifiedWords(new[] { "the", "of", "and", "at", "vs", "a", "an", "but", "nor", "for", "on", "so", "yet" });
+            newName = newName.LowercaseSpecifiedWords(new[] { "the", "of", "and", "at", "vs", "a", "an", "but", "nor", "for", "on", "so", "yet", "to" });
             newName = newName.UppercaseSpecifiedWords(new[]
                 {"ai", "usa", "uk", "pal", "ntsc", "html", "ui", "dns", "html", "xml", "php", "ux", "usb", "uwp", "sql", "tfs", "css", "api" });
             newName = newName.UpperCaseFirstLetter();
