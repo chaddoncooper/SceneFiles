@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using System.IO.Abstractions;
+using System.Reflection;
 
 namespace SceneFiles
 {
@@ -31,11 +32,10 @@ namespace SceneFiles
                 .AddTransient<ISceneRenamer, GenericSceneRenamer>();
         }
 
-
         private static AppSettings LoadConfiguration()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
                 .AddJsonFile("appsettings.json", optional: true,
                              reloadOnChange: true);
             var appSettingsJson =  builder.Build().Get<AppSettings>();

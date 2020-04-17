@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace SceneFiles
 {
@@ -21,7 +22,7 @@ namespace SceneFiles
             {
                 newName = newName.RemoveSpecifiedWordsFromEnd(_appSettings.RemoveSpecifiedWordsFromEnd);
             }
-            
+
             if (_appSettings.ReplaceSpecifiedCharsWithWhitespace.Count() > 0)
             {
                 newName = newName.ReplaceSpecifiedCharsWithWhitespace(_appSettings.ReplaceSpecifiedCharsWithWhitespace);
