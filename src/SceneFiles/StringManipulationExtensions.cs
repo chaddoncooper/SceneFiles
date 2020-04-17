@@ -29,7 +29,24 @@ namespace SceneFiles
             foreach (var wordToLowercase in wordsToLowercase)
             {
                 var pattern = string.Format(@"(?<!\S){0}(?!\S)", wordToLowercase);
-                str = Regex.Replace(str, pattern, wordToLowercase, RegexOptions.IgnoreCase);
+                str = Regex.Replace(str, pattern, wordToLowercase.ToLower(), RegexOptions.IgnoreCase);
+            }
+
+            return str;
+        }
+
+        /// <summary>
+        /// Converts specified words within a string into Uppercase.
+        /// </summary>
+        /// <param name="str">A string, usually a sentence.</param>
+        /// <param name="wordsToUppercase">Words which you wish to convert to Uppercase.</param>
+        /// <returns>The string with specified words converted to Uppercase.</returns>
+        public static string UppercaseSpecifiedWords(this string str, IEnumerable<string> wordsToUppercase)
+        {
+            foreach (var wordToUppercase in wordsToUppercase)
+            {
+                var pattern = string.Format(@"(?<!\S){0}(?!\S)", wordToUppercase);
+                str = Regex.Replace(str, pattern, wordToUppercase.ToUpper(), RegexOptions.IgnoreCase);
             }
 
             return str;

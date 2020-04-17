@@ -24,9 +24,22 @@ namespace SceneFilesTests
         public void LowercaseCertainWords(string inputString, string expectedOutput)
         {
             var wordsToLowercase = new[]
-                {"the", "of", "and", "at", "vs", "a", "an", "but", "nor", "for", "on", "so", "yet"};
+                {"the", "of", "and", "at", "vs", "a", "an", "BUT", "nor", "for", "on", "so", "yet"};
 
             var output = inputString.LowercaseSpecifiedWords(wordsToLowercase);
+
+            Assert.Equal(expectedOutput, output);
+        }
+
+        [Theory]
+        [InlineData("ai is the future", "AI is the future")]
+        [InlineData("Born in the usa", "Born in the USA")]
+        public void UppercaseCertainWords(string inputString, string expectedOutput)
+        {
+            var wordsToUppercase = new[]
+                {"ai", "usa", "uk", "pal", "ntsc", "html", "ui", "dns", "html", "xml", "php", "ux", "usb", "uwp", "sql", "tfs", "css", "api" };
+
+            var output = inputString.UppercaseSpecifiedWords(wordsToUppercase);
 
             Assert.Equal(expectedOutput, output);
         }

@@ -13,25 +13,16 @@
         {
             var newName = _fileAndDirectoryRenamer.GetCurrentFileOrDirectoryName(fileOrDirectoryPath);
 
-            newName = ReplaceCharsWithWhitespace(newName);
+            newName = newName.ReplaceSpecifiedCharsWithWhitespace(new[] { '.', '_' });
             newName = newName.ToTitleCase();
-            newName = LowercaseWords(newName);
+            newName = newName.LowercaseSpecifiedWords(new[] { "the", "of", "and", "at", "vs", "a", "an", "but", "nor", "for", "on", "so", "yet" });
+            newName = newName.UppercaseSpecifiedWords(new[]
+                {"ai", "usa", "uk", "pal", "ntsc", "html", "ui", "dns", "html", "xml", "php", "ux", "usb", "uwp", "sql", "tfs", "css", "api" });
             newName = newName.UpperCaseFirstLetter();
             newName = newName.PutLastOccurenceOfAYearInParentheses();
             newName = newName.FormatEditionsToLowercase();
 
             _fileAndDirectoryRenamer.RenameFileWithoutExtensionOrDirectory(fileOrDirectoryPath, newName);
-        }
-
-        private static string ReplaceCharsWithWhitespace(string inputString)
-        {
-            return inputString.ReplaceSpecifiedCharsWithWhitespace(new[] {'.', '_'});
-        }
-
-        private static string LowercaseWords(string inputString)
-        {
-            return inputString.LowercaseSpecifiedWords(new[]
-                {"the", "of", "and", "at", "vs", "a", "an", "but", "nor", "for", "on", "so", "yet"});
         }
     }
 }
